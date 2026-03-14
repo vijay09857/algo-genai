@@ -16,8 +16,8 @@ class ProfileInfo(BaseModel):
 agent = Agent(
     #'ollama:llama3-groq-tool-use:8b',
     'groq:llama-3.3-70b-versatile',
-    instructions="You are a helpful assistant to extract structure",
-    output_type=ProfileInfo,
+    instructions="You are a helpful assistant to extract structure: here is json schema for the output: {name: str, experience_years: int, skills: list[str]}",
+    #output_type=ProfileInfo,
     retries=5
 )
 
