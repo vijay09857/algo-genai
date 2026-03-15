@@ -9,7 +9,7 @@ async def sleep_for_some_time(value: int) -> int:
 
 
 async def main() -> None:
-    tasks = [sleep_for_some_time(i) for i in range(100)]
+    tasks = [sleep_for_some_time(i) for i in range(10)]
     values = await asyncio.gather(*tasks)
     print(sum(values))
 

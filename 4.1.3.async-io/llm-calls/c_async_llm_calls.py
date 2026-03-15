@@ -14,7 +14,7 @@ agent = Agent(
 )
 
 async def main() -> None:
-    tasks = [agent.run("what is the capital of india. Just answer in one word") for _ in range(100)]
+    tasks = [agent.run("what is the capital of india. Just answer in one word") for _ in range(10)]
     values = await asyncio.gather(*tasks)
     print(*values)
 
