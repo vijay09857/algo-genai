@@ -56,14 +56,3 @@ async def extract_structured_data(image_paths: list[Path]) -> list[Invoice | Pay
     tasks = [run_inference(path) for path in image_paths]
     results_objects = await asyncio.gather(*tasks)
     return results_objects
-
-async def workflow():
-    pdf_dir = Path(__file__).parent.resolve() / "data1"
-    temp_dir = pdf_dir / "temp_files"
-    results_dir = pdf_dir / "results"
-
-    pdf_paths = list_all_files(pdf_dir)
-    for pdf_path in pdf_paths:
-        image_paths = pdf_to_jpg(pdf_path, temp_dir)
-        results = await extract_structured_data(image_paths)
-        save_results_to_json(pdf_path.stem, results, results_dir)
