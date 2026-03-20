@@ -11,7 +11,7 @@ from models.category import DocumentCategory
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.github import GitHubProvider
 from pydantic_ai.settings import ModelSettings
-from utils import list_all_files, pdf_to_jpg, save_results_to_json
+from utils.utils import list_all_files, pdf_to_jpg, save_results_to_json
 
 load_dotenv(override=True)
 

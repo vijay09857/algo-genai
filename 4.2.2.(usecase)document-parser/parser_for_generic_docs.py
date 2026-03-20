@@ -1,7 +1,7 @@
 import asyncio
 import time
 from pathlib import Path
-from utils import list_all_files, pdf_to_jpg, save_results_to_json
+from utils.utils import list_all_files, pdf_to_jpg, save_results_to_json
 from agents.agents_generic import analyze_each_page
 
 async def workflow():

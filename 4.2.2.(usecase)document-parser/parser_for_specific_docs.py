@@ -2,7 +2,7 @@ import asyncio
 from pathlib import Path
 import time
 from agents.agents_custom import extract_structured_data   
-from utils import list_all_files, pdf_to_jpg, save_results_to_json
+from utils.utils import list_all_files, pdf_to_jpg, save_results_to_json
 
 async def workflow():
     base_dir = Path(__file__).parent.resolve() / "data1" 

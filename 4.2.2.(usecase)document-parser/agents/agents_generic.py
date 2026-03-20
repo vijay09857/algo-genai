@@ -1,55 +1,14 @@
 import asyncio
 import os
-import time
 from pathlib import Path
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field
 from pydantic_ai import Agent, BinaryContent
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.github import GitHubProvider
 from pydantic_ai.settings import ModelSettings
-#from models.generic import ModelAnalysisOutput, OCROutput
-from utils import list_all_files, pdf_to_jpg, save_results_to_json
+from models.generic import ModelAnalysisOutput, OCROutput
 
 load_dotenv()
-
-class FileElement(BaseModel):
-    """Represents a single element detected on a document page.
-
-    Examples of elements:
-    - A table with columns and rows
-    - A paragraph of text
-    - An image or logo description
-    - A header or title
-    - A list or bullet points
-    """
-
-    element_type: str = Field(description="Type of the element found on the page", default="")
-    element_content: str = Field(description="Content of the element found on the page", default="")
-
-
-class ModelAnalysisOutput(BaseModel):
-    """Structured output from the LLM for document analysis.
-
-    This is the schema that tells the LLM exactly what we want back.
-    PydanticAI uses this to enforce type checking on LLM responses.
-    """
-
-    file_type: str = Field(
-        description="Type name which can describe given file precisely, e.g.: invoice, internal_document, instruction, other",
-        default="",
-    )
-    file_content_md: str = Field(description="Output of the OCR process, contents of the file in Markdown", default="")
-    file_elements: list[FileElement] = Field(
-        description="Elements the given page consists from: tables, images, paragraphs, graphs, flowcharts etc.", default_factory=list
-    )
-
-
-class OCROutput(BaseModel):
-    """Final output combining the filename and structured analysis results."""
-
-    filename: str = ""
-    analysis_result: ModelAnalysisOutput = Field(default_factory=ModelAnalysisOutput)
 
 model = OpenAIChatModel("openai/gpt-4o", provider=GitHubProvider(api_key=os.getenv("GITHUB_API_KEY")), settings=ModelSettings(temperature=0))
 
