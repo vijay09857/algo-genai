@@ -1,7 +1,6 @@
 import asyncio
 import os
 from pathlib import Path
-import time
 from dotenv import load_dotenv
 from pydantic_ai import Agent, BinaryContent
 from models.invoice import Invoice
@@ -68,13 +67,3 @@ async def workflow():
         image_paths = pdf_to_jpg(pdf_path, temp_dir)
         results = await extract_structured_data(image_paths)
         save_results_to_json(pdf_path.stem, results, results_dir)
-
-
-if __name__ == "__main__":
-    start_time = time.perf_counter()
-    try:
-        asyncio.run(workflow())
-    except Exception as e:
-        print(e)
-    end_time = time.perf_counter() - start_time
-    print(f"Analysis took: {end_time:.1f} seconds")
