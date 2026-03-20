@@ -1,4 +1,4 @@
-import asyncio
+from tqdm.asyncio import tqdm_asyncio
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -36,5 +36,5 @@ async def run_inference(image_path: Path) -> OCROutput:
 
 async def analyze_each_page(image_paths: list[Path]) -> list[OCROutput]:
     tasks = [run_inference(path) for path in image_paths]
-    results_objects = await asyncio.gather(*tasks)
+    results_objects = await tqdm_asyncio.gather(*tasks)
     return results_objects

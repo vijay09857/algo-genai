@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 import PyPDF2
 from pdf2image import convert_from_path
-from pydantic import BaseModel
+
 
 def list_all_files(directory: Path, extension: str = "pdf") -> list[Path]:
     return [Path(directory, f) for f in os.listdir(directory) if f.lower().endswith(extension)]
