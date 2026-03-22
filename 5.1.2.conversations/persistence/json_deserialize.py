@@ -13,22 +13,12 @@ agent = Agent(
     instructions="You are helpful assistant."
 )
 
+history_path = Path(__file__).parent.parent.resolve() / "data" / "history.json"
+with open(history_path, "rb") as f:
+    history = json.load(f)
 
-def main():
-    history_path = Path(__file__).parent.parent.resolve() / "data" / "history.json"
-    with open(history_path, "rb") as f:
-        history = json.load(f)
-
-    history = ModelMessagesTypeAdapter.validate_python(history)
-    while True:
-        user_message = input(">>")
-        if user_message == "q":
-            break
-        result = agent.run_sync(user_message, message_history=history)
-        print(result.output)
-        history.extend(result.new_messages())
-
-
-if __name__ == "__main__":
-    main()
+history = ModelMessagesTypeAdapter.validate_python(history)
+result = agent.run_sync("Tell me a different motto compared to past.", message_history=history)
+print(result.output)
+print(result.usage())
 

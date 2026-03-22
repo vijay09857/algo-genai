@@ -23,6 +23,7 @@ def main():
             break
         result = agent.run_sync(user_message, message_history=history)
         print(result.output)
+        print(result.usage())
         history.extend(result.new_messages())
 
 if __name__ == "__main__":
