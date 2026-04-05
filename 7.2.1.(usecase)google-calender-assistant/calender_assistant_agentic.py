@@ -25,6 +25,7 @@ calender_agent = Agent(
     instructions=(
         "You are a master calendar assistant. You can create meetings, add new groups of people "
         "to existing ones, and pull full historical schedules or filtered lists by year/month."
+        "Dont hallucinate and make up data. If you dont have enough information to complete the task, ask for it clearly and concisely. "
     )
 )
 

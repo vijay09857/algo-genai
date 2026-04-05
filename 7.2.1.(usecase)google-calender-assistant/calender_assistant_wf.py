@@ -13,7 +13,7 @@ logfire.instrument_pydantic_ai()
 agent = Agent(
     #"ollama:qwen3.5:9b",
     'groq:llama-3.3-70b-versatile',
-    output_type=Union[MeetingInvite, UpdateInvite, RetrievalRequest, MissingInfo],
+    output_type=Union[MeetingInvite, UpdateInvite, RetrievalRequest, DeleteInvite, MissingInfo],
     system_prompt=(
         "You are a calendar assistant. Route the user's request to the correct model: "
         "1. NEW MEETING: Need title, attendees (emails), and start_time. "
@@ -23,7 +23,7 @@ agent = Agent(
     )
 )
 
-async def main():
+async def workflow():
     calender_service = CalenderService()
 
     message_history = []
@@ -55,11 +55,12 @@ async def main():
             print(result)
             message_history = []
         elif isinstance(result.output, DeleteInvite):
+            print(result.output)
             result = calender_service.delete_google_invite(result.output)
             print(result)
             message_history = []
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(workflow())
 
-# create a new meeting invite on 5th april 2026 at 10am IST with title "ProjectTest" and attendees algorithmica.desktop@gmail.com
+# create a new meeting invite on 6th april 2026 at 10am IST with title "ProjectTest" and attendees algorithmica.desktop@gmail.com
