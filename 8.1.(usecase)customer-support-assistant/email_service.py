@@ -7,7 +7,7 @@ class EmailService:
         self.smtp_server = "smtp.gmail.com"
         self.smtp_port = 587
         self.sender_email = "info@algorithmicaonline.com"
-        self.sender_password = "xebq rxeg zqrp frjd"
+        self.sender_password = ""
 
     def send_email(self, email_details: EmailDetails):
         msg = MIMEText(email_details.body)
